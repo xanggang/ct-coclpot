@@ -9,7 +9,7 @@
     <div class="card-inner"></div>
   </div>
 
-  <div class="card">
+  <div class="card" v-if="false">
     <div class="main-content">
       <div class="header">
         <span>Article on</span>
@@ -146,6 +146,8 @@
   background: rgb(61, 60, 61);
   margin-top: 20px;
   border-radius: 12px;
+  //border: 2px solid rgba(255, 255, 255, 1);
+  //animation: borderFade 2s infinite;
 
   .inner {
     background-color: #323132;
@@ -176,24 +178,35 @@
   @keyframes move1 {
     0% {
       left: -10%;
-      top: -10%
+      top: -10%;
     }
-
     25% {
       left: 60%;
-      top: -10%
+      top: -10%;
     }
     50% {
       left: 60%;;
-      top: 60%
+      top: 60%;
     }
     75% {
       left: -10%;
-      top: 60%
+      top: 60%;
     }
     100% {
       left: -10%;
-      top: -10%
+      top: -10%;
+    }
+  }
+
+  @keyframes borderFade {
+    0% {
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    50% {
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+    100% {
+      border: 1px solid rgba(255, 255, 255, 0.5);
     }
   }
 }

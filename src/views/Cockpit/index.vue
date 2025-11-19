@@ -3,6 +3,8 @@ import Header from '@/components/Header.vue'
 import Left from './Left.vue'
 import Right from './Right.vue'
 import Center from './Center.vue'
+import SvgCard from './SvgCard.vue'
+import SvgCardA from './svgcard/index.vue'
 </script>
 
 <template>
@@ -13,10 +15,16 @@ import Center from './Center.vue'
       <div class="main-screen-left">
         <Left></Left>
       </div>
-      <div class="main-screen-right">
-        <Right></Right>
-      </div>
+<!--      <div class="main-screen-right">-->
+<!--&lt;!&ndash;        <Right></Right>&ndash;&gt;-->
+<!--  -->
+<!--      </div>-->
+<!--      <SvgCard class="main-screen-right"></SvgCard>-->
+      <SvgCardA class="main-screen-right"></SvgCardA>
 
+      <div class="main-screen-map flex-center">
+        <SvgCardA></SvgCardA>
+      </div>
 <!--      <Center></Center>-->
     </div>
   </div>
@@ -59,5 +67,10 @@ import Center from './Center.vue'
   }
 
 
+  .flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 </style>
