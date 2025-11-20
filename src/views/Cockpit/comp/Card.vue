@@ -66,6 +66,7 @@ defineProps({
         width: 25px;
         height: 16px;
         margin-right: 10px;
+        background-repeat: no-repeat;
       }
     }
 

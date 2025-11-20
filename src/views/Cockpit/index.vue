@@ -5,6 +5,7 @@ import LabelComp from './comp/LabelComp.vue'
 import Card from './comp/Card.vue'
 
 import Left from './Left.vue'
+import Right from './Right.vue'
 import Cube from './comp/Cube.vue'
 </script>
 
@@ -14,12 +15,14 @@ import Cube from './comp/Cube.vue'
 
     <div class="main-screen-content">
       <div class="main-screen-left">
-<!--        <Left></Left>-->
+        <Left></Left>
       </div>
       <div class="main-screen-right">
+        <Right></Right>
       </div>
 
       <div class="main-screen-map flex-center">
+        <CenterNavCard></CenterNavCard>
         <Cube class="cube-comp"></Cube>
       </div>
 
@@ -74,14 +77,15 @@ import Cube from './comp/Cube.vue'
     top: 0;
 
     .cube-comp {
-      width: 50%;
-      border: 1px solid #fff;
-      height: 80%;
+      width: 45%;
+      //border: 1px solid #fff;
+      height: calc(100% - 350px);
+      margin-top: 80px;
     }
 
     .center-nav-card {
       position: absolute;
-      top: 60px;
+      top: 120px;
       left: 50%;
       margin-left: -300px;
       width: 600px;

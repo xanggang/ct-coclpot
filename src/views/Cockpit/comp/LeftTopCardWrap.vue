@@ -2,8 +2,8 @@
 
 const config = [
   { label: '接入专有数据', value: '3亿+' },
-  { label: '公交2', value: '防汛2' },
-  { label: '公交3', value: '防汛3' },
+  { label: '训练', value: '50G+图像' },
+  { label: '训练', value: '3万+文本' },
 ]
 </script>
 

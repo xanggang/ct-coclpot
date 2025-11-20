@@ -1,72 +1,18 @@
 <script setup>
 import Card from './comp/Card.vue'
 import PieChart from './comp/PieChart.vue'
-import * as echarts from 'echarts'
 import LeftTopCardWrap from './comp/LeftTopCardWrap.vue'
 
-const options = {
-  // backgroundColor: "#111",
-  polar: {
-    radius: ["60%", "70%"],
-    center: ["50%", "50%"],
-  },
-  angleAxis: {
-    max: 100,
-    show: false,
-  },
-  radiusAxis: {
-    type: "category",
-    show: true,
-    axisLabel: {
-      show: false,
-    },
-    axisLine: {
-      show: false,
-    },
-    axisTick: {
-      show: false,
-    },
-  },
-  series: [
-    {
-      name: "",
-      type: "bar",
-      roundCap: true,
-      barWidth: 60,
-      showBackground: true,
-      backgroundStyle: {
-        color: "#321681",
-      },
-      data: [50],
-      coordinateSystem: "polar",
-
-      itemStyle: {
-        normal: {
-          color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [
-            {
-              offset: 0,
-              color: "#906cff",
-            },
-            {
-              offset: 1,
-              color: "#d9cffb",
-            },
-          ]),
-        },
-      },
-    },
-  ],
-};
 
 </script>
 
 <template>
 <div class="left-container">
-  <Card label="aaa" title="这里是一个标题"  class="top">
+  <Card label="AI升级市民服务" title="公交"  class="top">
     <div class="top-card-inner">
       <div class="pie-wrap">
-        <PieChart class="pie" color="purple" :options="options"></PieChart>
-        <PieChart class="pie" color="blue" :options="options"></PieChart>
+        <PieChart class="pie" color="purple" ></PieChart>
+        <PieChart class="pie" color="blue" ></PieChart>
       </div>
 
       <div class="text-wrap">
@@ -79,7 +25,7 @@ const options = {
       <LeftTopCardWrap class="nav-card-wrap"></LeftTopCardWrap>
     </div>
   </Card>
-  <Card class="bottom"  label="aaa">
+  <Card class="bottom"  label="企业宣传片">
     <div class="video"></div>
   </Card>
 </div>

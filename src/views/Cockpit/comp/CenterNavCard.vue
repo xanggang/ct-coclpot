@@ -4,9 +4,9 @@ import { ref } from 'vue'
 const select = ref('1')
 const config = [
   { label: '公交1', value: '防汛1' },
-  { label: '公交2', value: '防汛2' },
-  { label: '公交3', value: '防汛3' },
-  { label: '公交3', value: '防汛53' },
+  { label: '防汛', value: '防汛2' },
+  { label: '路桥', value: '防汛3' },
+  { label: '环境', value: '防汛53' },
 ]
 </script>
 
@@ -46,6 +46,7 @@ const config = [
       font-weight: bold;
       font-size: 22px;
       color: #A0A3E0;
+      margin-top: 5px;
     }
 
 
