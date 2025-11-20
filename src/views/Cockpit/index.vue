@@ -1,31 +1,31 @@
 <script setup>
 import Header from '@/components/Header.vue'
+import CenterNavCard from './comp/CenterNavCard.vue'
+import LabelComp from './comp/LabelComp.vue'
+import Card from './comp/Card.vue'
+
 import Left from './Left.vue'
-import Right from './Right.vue'
-import Center from './Center.vue'
-import SvgCard from './SvgCard.vue'
-import SvgCardA from './svgcard/index.vue'
 </script>
 
 <template>
   <div class="main-screen">
-    <Header></Header>
+<!--    <Header></Header>-->
 
     <div class="main-screen-content">
       <div class="main-screen-left">
         <Left></Left>
+<!--        <LabelComp>AI升级市民服务</LabelComp>-->
+<!--        <Card style="height: 300px;margin-top: 10px;"></Card>-->
       </div>
-<!--      <div class="main-screen-right">-->
-<!--&lt;!&ndash;        <Right></Right>&ndash;&gt;-->
-<!--  -->
-<!--      </div>-->
+      <div class="main-screen-right">
+      </div>
 <!--      <SvgCard class="main-screen-right"></SvgCard>-->
-      <SvgCardA class="main-screen-right"></SvgCardA>
+<!--      <SvgCardA class="main-screen-right"></SvgCardA>-->
 
       <div class="main-screen-map flex-center">
-        <SvgCardA></SvgCardA>
+<!--        <CenterNavCard class="center-nav-card"></CenterNavCard>-->
       </div>
-<!--      <Center></Center>-->
+
     </div>
   </div>
 </template>
@@ -43,7 +43,7 @@ import SvgCardA from './svgcard/index.vue'
 
   .main-screen-content{
     width: 100%;
-    height: calc(100% - 124px);
+    height: calc(100% - 110px);
   }
 
   .main-screen-left,
@@ -51,19 +51,35 @@ import SvgCardA from './svgcard/index.vue'
     width: 24%;
     position: absolute;
     top: 88px;
-    bottom: 30px;
+    bottom: 24px;
     //background: red;
     z-index: 3;
     //background: #333;
   }
 
   .main-screen-left{
-    left: 50px;
+    left: 24px;
   }
 
   .main-screen-right{
     right: 50px;
 
+  }
+
+  .main-screen-map{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    //background: red;
+
+    .center-nav-card {
+      position: absolute;
+      top: 60px;
+      left: 50%;
+      margin-left: -300px;
+      width: 600px;
+    }
   }
 
 
