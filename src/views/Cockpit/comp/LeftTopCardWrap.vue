@@ -23,15 +23,13 @@ const config = [
   justify-content: center;
   align-items: center;
   flex-shrink: 0;
-  height: 90px;
-  row-gap: 10px;
-  margin-top: 10px;
+  row-gap: 12px;
 
   .card-item {
     width: 100%;
     height: 100%;
     background-image: url("@/assets/img/card-bg-2.png");
-    background-size: cover;
+    background-size: 100% 100%;
     background-repeat: no-repeat;
     display: flex;
     justify-content: center;

@@ -62,8 +62,8 @@ const options = {
 
 <template>
 <div class="left-container">
-  <div class="top">
-    <Card title="这里是一个标题">
+  <Card label="aaa" title="这里是一个标题"  class="top">
+    <div class="top-card-inner">
       <div class="pie-wrap">
         <PieChart class="pie" color="purple" :options="options"></PieChart>
         <PieChart class="pie" color="blue" :options="options"></PieChart>
@@ -76,11 +76,12 @@ const options = {
           平均滞留时间缩短</div>
       </div>
 
-      <LeftTopCardWrap></LeftTopCardWrap>
-
-    </Card>
-  </div>
-  <div class="bottom"></div>
+      <LeftTopCardWrap class="nav-card-wrap"></LeftTopCardWrap>
+    </div>
+  </Card>
+  <Card class="bottom"  label="aaa">
+    <div class="video"></div>
+  </Card>
 </div>
 </template>
 
@@ -95,43 +96,63 @@ const options = {
     width: 100%;
     height: 50%;
 
-    .pie-wrap {
+    .top-card-inner {
       width: 100%;
-      height: 200px;
+      height: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: space-between;
-      align-items: center;
+      row-gap: 10px;
 
-      .pie {
-        width: 50%;
-        height: 200px;
+
+      .pie-wrap {
+        width: 100%;
+        height: calc(100% - 20px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .pie {
+          width: 50%;
+          height: 100%;
+        }
+      }
+
+      .text-wrap {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10%;
+
+        > div {
+          width: 50%;
+          font-family: SourceHanSansSC, SourceHanSansSC;
+          font-weight: 400;
+          font-size: 14px;
+          color: #A8A7DF;
+          text-align: center;
+          font-style: normal;
+          text-transform: none;
+        }
+      }
+
+      .nav-card-wrap {
+        height: 30%;
       }
     }
 
-    .text-wrap {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-top: 20px;
-
-      > div {
-        width: 50%;
-        font-family: SourceHanSansSC, SourceHanSansSC;
-        font-weight: 400;
-        font-size: 14px;
-        color: #A8A7DF;
-        text-align: center;
-        font-style: normal;
-        text-transform: none;
-      }
-    }
   }
 
   .bottom {
     width: 100%;
     height: 40%;
-    border: 1px solid #fff;
     margin-top: 20px;
+
+    .video {
+      width: 100%;
+      height: 100%;
+      background-color: rgba(254, 255, 230, 0.09);
+    }
   }
  }
 

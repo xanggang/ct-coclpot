@@ -5,25 +5,22 @@ import LabelComp from './comp/LabelComp.vue'
 import Card from './comp/Card.vue'
 
 import Left from './Left.vue'
+import Cube from './comp/Cube.vue'
 </script>
 
 <template>
   <div class="main-screen">
-<!--    <Header></Header>-->
+    <Header></Header>
 
     <div class="main-screen-content">
       <div class="main-screen-left">
-        <Left></Left>
-<!--        <LabelComp>AI升级市民服务</LabelComp>-->
-<!--        <Card style="height: 300px;margin-top: 10px;"></Card>-->
+<!--        <Left></Left>-->
       </div>
       <div class="main-screen-right">
       </div>
-<!--      <SvgCard class="main-screen-right"></SvgCard>-->
-<!--      <SvgCardA class="main-screen-right"></SvgCardA>-->
 
       <div class="main-screen-map flex-center">
-<!--        <CenterNavCard class="center-nav-card"></CenterNavCard>-->
+        <Cube class="cube-comp"></Cube>
       </div>
 
     </div>
@@ -68,10 +65,19 @@ import Left from './Left.vue'
 
   .main-screen-map{
     width: 100%;
-    height: 100%;
+    height: 100vh;
     position: absolute;
     z-index: 1;
-    //background: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+
+    .cube-comp {
+      width: 50%;
+      border: 1px solid #fff;
+      height: 80%;
+    }
 
     .center-nav-card {
       position: absolute;
