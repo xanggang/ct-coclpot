@@ -87,8 +87,8 @@ import Cube from './comp/Cube.vue'
       position: absolute;
       top: 120px;
       left: 50%;
-      margin-left: -300px;
-      width: 600px;
+      margin-left: -400px;
+      width: 800px;
     }
   }
 

@@ -5,3 +5,23 @@
   width: 100vw;
   height: 100vh;
 }
+
+
+/* 基础rem设置 */
+html {
+  font-size: calc(100vw / 19.2); /* 1920/100 */
+}
+
+/* 超宽屏适配 */
+@media (min-aspect-ratio: 21/9) {
+  html {
+    font-size: calc(100vh / 10.8); /* 基于高度计算 */
+  }
+}
+
+/* 额外的大屏限制 */
+@media (min-width: 2560px) and (min-height: 1440px) {
+  html {
+    font-size: 133.33px; /* 固定值 */
+  }
+}

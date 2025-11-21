@@ -53,7 +53,7 @@ import LeftTopCardWrap from './comp/LeftTopCardWrap.vue'
 
       .pie-wrap {
         width: 100%;
-        height: calc(100% - 20px);
+        height: calc(60% - 20px);
         display: flex;
         justify-content: space-between;
         align-items: center;

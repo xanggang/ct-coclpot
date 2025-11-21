@@ -1,7 +1,7 @@
 <script setup>
 import { setRem } from '@/utils/rem'
 
-setRem()
+// setRem()
 </script>
 
 <template>
