@@ -1,69 +1,131 @@
-
 <script setup>
-import { CountTo } from 'vue3-count-to';
-import { nextTick, ref } from 'vue'
-import AbstractionPermitDialog from './AbstractionPermitDialog.vue'
-import { Vue3SeamlessScroll } from "vue3-seamless-scroll";
-
-
-const open = ref(false)
-
-function changeOpen() {
-  open.value = !open.value
-}
-
-let startVal = ref(0)
-const endVal = ref(100)
-const isShow = ref(true)
-
-setInterval(() => {
-  startVal.value = endVal.value
-  endVal.value += 1
-  isShow.value = false
-
-  nextTick(() =>  {
-    isShow.value = true
-  })
-}, 3000)
-
-const listData = ref([
-  { name: '北京分公司销售额', value: '¥1,234,500' },
-  { name: '上海分公司销售额', value: '¥1,100,200' },
-  { name: '广州分公司销售额', value: '¥980,000' },
-  { name: '深圳分公司销售额', value: '¥850,000' },
-  { name: '成都分公司销售额', value: '¥620,000' },
-]);
+import Header from '@/components/Header.vue'
+import TopNav from './TopNav.vue'
+import Left from './Left.vue'
+import Center from './Center.vue'
+import Right from './Right.vue'
 </script>
 
 <template>
-  <div style="width: 100vw;height: 100vh; background: #fff;">
-    <CountTo :startVal="startVal" :endVal="endVal"></CountTo>
-    <button @click="changeOpen"> changeOpen</button>
-    <AbstractionPermitDialog v-if="open" @close="open = !open"></AbstractionPermitDialog>
+  <div class="main-screen">
+    <Header title="AI+公交：赋能智能公共交通"></Header>
 
-    <div style="width: 300px;height: 300px;border: 1px solid red;overflow: hidden">
-      <vue3-seamless-scroll
-        :list="listData"
-        class="scroll-content"
-        :hover="true"
-        :step="0.5"
-      >
-        <div class="item" v-for="(item, index) in listData" :key="index">
-          <span class="index">{{ index + 1 }}</span>
-          <span class="name">{{ item.name }}</span>
-          <span class="value">{{ item.value }}</span>
+    <div class="main-screen-content">
+      <TopNav></TopNav>
+
+      <div class="center-wrap">
+        <div class="card">
+          <div class="label">车辆调度智能体</div>
+          <Left></Left>
         </div>
-      </vue3-seamless-scroll>
+        <div class="card">
+          <div class="label">灵隐场站调度智能体</div>
+          <Center></Center>
+        </div>
+        <div class="right">
+          <Right></Right>
+        </div>
+      </div>
     </div>
 
-
   </div>
-
 </template>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 
-* {
-  font-size: 18px;
+.main-screen {
+  height: 100%;
+  width: 100%;
+  //background-color: #000;
+  background: url("@/assets/floodControl/bg.jpg");
+  background-size: 100% 100%;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+
+  .main-screen-content {
+    width: 100%;
+    height: calc(100% - 110px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding-left: 48px;
+    padding-right: 48px;
+
+    .center-wrap {
+      width: 100%;
+      height: calc(100% - 160px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 40px;
+    }
+  }
+
+  .card {
+    width: calc(33% - 10px);
+    height: 100%;
+    background-image: url("@/assets/bus/Group 6.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    padding: 30px 30px 10px;
+    box-sizing: border-box;
+    position: relative;
+
+    .label {
+      position: absolute;
+      font-family: AlimamaShuHeiTi;
+      top: -20px;
+      right: 40px;
+      font-size: 24px;
+      background: linear-gradient(180deg, #ffffff, #ffffff, #A589E7);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: transparent; /* 兼容性备用 */
+    }
+  }
+
+  .right {
+    width: calc(33% - 10px);
+    height: 100%;
+  }
+}
+
+:deep(.value-text) {
+  font-family: AlibabaPuHuiTi-2-55-Regular;
+  font-weight: normal;
+  font-size: 40px;
+  color: #3AFFD6;
+  font-style: normal;
+  text-transform: none;
+}
+
+:deep(.default-text) {
+  font-family: AlibabaPuHuiTi-2-55-Regular;
+  font-weight: normal;
+  font-size: 20px;
+  color: #FFF;
+  font-style: normal;
+  text-transform: none;
+}
+
+:deep(.mr-5) {
+  margin-right: 5px;
+}
+
+:deep(.mt-5) {
+  margin-top: 5px;
+}
+
+:deep(.flex-center) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+:deep(.text-center) {
+  text-align: center;
 }
 </style>

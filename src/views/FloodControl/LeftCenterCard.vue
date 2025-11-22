@@ -64,6 +64,7 @@ const listData = ref([
     width: 9px;
     height: 17px;
     transform: rotate(90deg);
+    background-repeat: no-repeat;
   }
   .bottom-arrow {
     position: absolute;

@@ -46,7 +46,6 @@ defineProps({
     font-style: normal;
     text-transform: none;
     margin-top: 20px;
-
     background: linear-gradient(180deg, #ffffff, #A589E7);
     -webkit-background-clip: text;
     background-clip: text;
