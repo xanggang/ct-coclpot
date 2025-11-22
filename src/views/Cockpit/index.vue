@@ -11,7 +11,7 @@ import Cube from './comp/Cube.vue'
 
 <template>
   <div class="main-screen">
-    <Header></Header>
+    <Header title="城智产业大模型"></Header>
 
     <div class="main-screen-content">
       <div class="main-screen-left">
@@ -62,7 +62,7 @@ import Cube from './comp/Cube.vue'
   }
 
   .main-screen-right{
-    right: 50px;
+    right: 24px;
 
   }
 

@@ -3,13 +3,9 @@ import { ref } from 'vue'
 
 const select = ref('1')
 const config = [
-  { label: '公交1', value: '防汛1' },
+  { label: '公交', value: '防汛1' },
   { label: '防汛', value: '防汛2' },
   { label: '路桥', value: '防汛3' },
-  { label: '环境', value: '防汛53' },
-  { label: '环境', value: '防汛53' },
-  { label: '环境', value: '防汛53' },
-  { label: '环境', value: '防汛53' },
   { label: '环境', value: '防汛53' },
 ]
 </script>

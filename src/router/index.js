@@ -45,7 +45,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/Environment',
+      path: '/environment',
       component: () => import('@/views/Environment/index.vue'),
       name: 'Environment',
       meta: {
@@ -55,7 +55,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/FloodControl',
+      path: '/floodControl',
       component: () => import('@/views/FloodControl/index.vue'),
       name: 'FloodControl',
       meta: {

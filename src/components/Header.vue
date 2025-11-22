@@ -2,13 +2,19 @@
   <div class="main-screen-header">
     <div class="logo"></div>
     <div class="title">
-      城智产业大模型
+      {{ title }}
     </div>
   </div>
 </template>
 
-<script lang="ts" setup>
+<script  setup>
 
+defineProps({
+  title: {
+    type: String,
+    default: ''
+  }
+})
 </script>
 
 <style scoped lang="less">
