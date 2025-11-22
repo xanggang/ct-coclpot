@@ -1,5 +1,13 @@
 <script setup>
 import Tabs from './comp/Tabs.vue'
+
+const config = [
+  { label: '路面积水', value: '1' },
+  { label: '异物倒伏', value: '2' },
+  { label: '污水满溢', value: '3' },
+  { label: '山体滑坡', value: '4' },
+  { label: '路面坍塌', value: '5' },
+]
 </script>
 
 <template>
@@ -27,7 +35,7 @@ import Tabs from './comp/Tabs.vue'
       </div>
     </div>
     <div class="right-table-wrap">
-      <Tabs class="tabs-dom"></Tabs>
+      <Tabs class="tabs-dom" :config="config"></Tabs>
       <div class="video-wrap">
         <img src="@/assets/floodControl/Frame(1).png" alt="">
 

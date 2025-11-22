@@ -48,7 +48,7 @@ const config = [
       <img :src="item.img" alt="">
       <div>
         <div>
-          <span class="value-text">{{ item.value }}</span>
+          <span class="value-text mr-5">{{ item.value }}</span>
           <span class="default-text">{{ item.unit }}</span>
         </div>
         <div class="default-text mt-5">
