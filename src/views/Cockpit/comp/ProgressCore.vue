@@ -82,6 +82,10 @@ const showNumber = computed(() => {
     text-transform: none;
     text-align: right;
     line-height: 22px;
+    img {
+      width: 10px;
+      margin-left: 5px;
+    }
   }
 }
 </style>

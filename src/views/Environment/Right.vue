@@ -136,10 +136,10 @@
     .item {
       width: 129px;
       height: 55px;
-      background: linear-gradient( 90deg, rgba(0,0,0,0.41) 39%, rgba(255,255,255,0.07) 89%, rgba(255,255,255,0.05) 100%);
-      border-radius: 6px 6px 6px 6px;
-      border: 1px solid rgba(255,255,255,0.15);
-      font-family: AlibabaPuHuiTi-2-55-Regular;
+      //background: linear-gradient( 90deg, rgba(0,0,0,0.41) 39%, rgba(255,255,255,0.07) 89%, rgba(255,255,255,0.05) 100%);
+      //border-radius: 6px 6px 6px 6px;
+      //border: 1px solid rgba(255,255,255,0.15);
+      //font-family: AlibabaPuHuiTi-2-55-Regular;
       font-weight: normal;
       font-size: 20px;
       color: #FFFFFF;
@@ -149,6 +149,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+
+      //width: 0px;
+      //height: 0px;
+      background: linear-gradient( 90deg, #2B167A 0%, #0C0626 100%);
+      border-radius: 6px;
+      border: 2px solid  #492eb7;
     }
 
     .arrow-wrap {

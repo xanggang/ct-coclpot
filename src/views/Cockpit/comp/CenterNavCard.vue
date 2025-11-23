@@ -46,20 +46,19 @@ function handelGo(item) {
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 22px;
-    cursor: pointer;
+    font-size: 18px;
     cursor: pointer;
 
     .label-text {
       font-family: SourceHanSansSC-Regular;
       font-weight: bold;
-      font-size: 22px;
+      font-size: 20px;
       color: #A0A3E0;
       margin-top: 5px;
     }
 
 
-    &.active {
+    &:hover {
       background-image: url("@/assets/img/b2.png");
 
       .label-text {
@@ -68,7 +67,7 @@ function handelGo(item) {
         background-clip: text;
         -webkit-text-fill-color: transparent;
         color: transparent; /* 兼容性备用 */
-        font-size: 22px;
+        font-size: 20px;
         font-family: SourceHanSansSC-Regular;
       }
     }

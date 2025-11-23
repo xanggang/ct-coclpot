@@ -222,6 +222,7 @@ const listData = ref([
       display: flex;
       justify-content: center;
       align-items: center;
+      background: linear-gradient( 90deg, #070218 39%,  #2a2042 100%);
 
       &:nth-child(1) {
         left: 8%;

@@ -101,7 +101,7 @@ const config = [
           <div class="unit-text">
             智能巡检系统于10月21日检测到人行道出些裂缝类病害。
           </div>
-          <div class="button-item mt-10">端侧小模型粗筛</div>
+          <div class="button-item mt-10">云端大模型精筛</div>
         </div>
       </div>
     </div>
@@ -281,18 +281,18 @@ const config = [
 
 .button-item {
   width: 192px;
-  height: 50px;
+  height: 42px;
   border-radius: 8px 8px 8px 8px;
   border: 1px solid #492eb7;
   background: linear-gradient(90deg, rgba(0, 0, 0, 0.41) 39%, rgba(255, 255, 255, 0.07) 89%, rgba(255, 255, 255, 0.05) 100%);
   font-family: AlibabaPuHuiTi-2-55-Regular;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 18px;
   color: #FFFFFF;
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 50px;
+  line-height: 42px;
 }
 
 :deep(.tabs) {

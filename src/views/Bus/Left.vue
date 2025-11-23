@@ -77,7 +77,7 @@ const listData = ref([
             :hover="true"
             :step="0.1"
           >
-            <div class="table-item" v-for="(item, index) in listData" :key="index">
+            <div class="table-item" v-for="(item, index) in listData" :key="item.name">
               <span class="point"></span>
               <span> {{ item.name }}</span>
             </div>
@@ -210,6 +210,8 @@ const listData = ref([
         box-sizing: border-box;
         background-image: url("@/assets/bus/Frame(4).png");
         background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
 
         img {
           display: block;

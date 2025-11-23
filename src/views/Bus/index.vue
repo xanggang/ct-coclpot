@@ -96,7 +96,7 @@ import Right from './Right.vue'
 :deep(.value-text) {
   font-family: AlibabaPuHuiTi-2-55-Regular;
   font-weight: normal;
-  font-size: 40px;
+  font-size: 36px;
   color: #3AFFD6;
   font-style: normal;
   text-transform: none;
@@ -105,7 +105,7 @@ import Right from './Right.vue'
 :deep(.default-text) {
   font-family: AlibabaPuHuiTi-2-55-Regular;
   font-weight: normal;
-  font-size: 20px;
+  font-size: 18px;
   color: #FFF;
   font-style: normal;
   text-transform: none;

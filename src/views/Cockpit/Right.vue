@@ -117,6 +117,7 @@ import Progress from './comp/Progress.vue'
         height: 16px;
         margin-right: 10px;
         background-repeat: no-repeat;
+        background-size: contain;
       }
     }
 
