@@ -1,20 +1,28 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+
+const { push } = useRouter()
 
 const select = ref('1')
 const config = [
-  { label: '公交', value: '防汛1' },
-  { label: '防汛', value: '防汛2' },
-  { label: '路桥', value: '防汛3' },
-  { label: '环境', value: '防汛53' },
+  { label: '公交', path: '/bus' },
+  { label: '防汛', path: '/floodControl' },
+  { label: '路桥', path: '/environment' },
+  { label: '环境', path: '/clean' },
 ]
+
+function handelGo(item) {
+  push(item.path)
+}
+
 </script>
 
 <template>
 <div class="center-nav-card">
-  <div class="button"
+  <div class="button active"
        :class="{active: select === item.value}"
-       @click="select = item.value"
+       @click="handelGo(item)"
        v-for="(item, index) in config" :key="index">
     <div class="label-text">{{ item.label }}</div>
   </div>
@@ -39,6 +47,7 @@ const config = [
     justify-content: center;
     align-items: center;
     font-size: 22px;
+    cursor: pointer;
     cursor: pointer;
 
     .label-text {

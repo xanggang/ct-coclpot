@@ -6,15 +6,15 @@ import ProgressCore from './ProgressCore.vue'
 <div class="progress-wrap">
   <div class="item">
     <div class="label">巡查综合成本</div>
-    <ProgressCore></ProgressCore>
+    <ProgressCore :num="0.4"></ProgressCore>
   </div>
   <div class="item">
     <div class="label">人工投入</div>
-    <ProgressCore :num="0.5" color="green"></ProgressCore>
+    <ProgressCore :num="0.7" color="green"></ProgressCore>
   </div>
   <div class="item">
     <div class="label">重复工作量</div>
-    <ProgressCore  :num="0.99" color="green"></ProgressCore>
+    <ProgressCore  :num="0.9" color="green"></ProgressCore>
   </div>
 </div>
 </template>

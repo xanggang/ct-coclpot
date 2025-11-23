@@ -47,7 +47,7 @@
     </div>
     <div class="bottom">
       <div class="table-wrap">
-        <img src="@/assets/floodControl/Frame(2).png" alt="">
+        <img src="@/assets/bus/Frame(6).png" alt="">
       </div>
       <div class="title">
         通过实时精准识别灵隐场站进出通道，获取实时客流，预判运力缺口并提前预警，实现对这一大型景区瞬时客流的高效、前瞻性管控。

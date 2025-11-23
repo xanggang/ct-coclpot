@@ -14,18 +14,18 @@ const props = defineProps({
 
 const innerWidth = computed(() => {
   return {
-    width: props.num * 100 + '%'
+    width: (1 - props.num) * 100 + '%'
   }
 })
 
 const textPos = computed(() => {
   return {
-    left: props.num * 100 < 80 ?  props.num * 100 + 5 + '%' : 'calc(100% - 80px)'
+    left: (1 - props.num) * 100 < 80 ?  (1 - props.num) * 100 + 5 + '%' : 'calc(100% - 80px)'
   }
 })
 
 const showNumber = computed(() => {
-  return props.num.toFixed(0) + '%'
+  return ( props.num * 100).toFixed(0) + '%'
 })
 
 </script>
@@ -46,7 +46,7 @@ const showNumber = computed(() => {
 <style scoped lang="less">
 .progress-bar {
   width: 100%;
-  height: 16px;
+  height: 22px;
   background: #2d2974;
   border-radius: 1px 1px 1px 1px;
   position: relative;
@@ -56,7 +56,7 @@ const showNumber = computed(() => {
     left: 0;
     top: 0;
     width: 80%;
-    height: 16px;
+    height: 22px;
 
     border-radius: 1px 1px 1px 1px;
     text-align: right;
@@ -81,6 +81,7 @@ const showNumber = computed(() => {
     font-style: normal;
     text-transform: none;
     text-align: right;
+    line-height: 22px;
   }
 }
 </style>

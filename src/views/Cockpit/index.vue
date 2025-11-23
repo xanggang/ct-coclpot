@@ -3,10 +3,15 @@ import Header from '@/components/Header.vue'
 import CenterNavCard from './comp/CenterNavCard.vue'
 import LabelComp from './comp/LabelComp.vue'
 import Card from './comp/Card.vue'
+import { useRouter } from 'vue-router'
 
 import Left from './Left.vue'
 import Right from './Right.vue'
 import Cube from './comp/Cube.vue'
+
+
+
+
 </script>
 
 <template>

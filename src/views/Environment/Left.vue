@@ -39,8 +39,8 @@ const config = [
         <img src="@/assets/env/Frame(4).png" alt="">
         <div>
           <div>
-            <span class="value-text mr-5">15</span>
-            <span class="default-text mt-5">倍</span>
+            <span class="value-text mr-5">80</span>
+            <span class="default-text mt-5">%</span>
           </div>
           <div class="default-text mt-5">灾害识别准确率</div>
         </div>
@@ -71,7 +71,7 @@ const config = [
 
         <div class="item-1">
           <div>
-            <div class="text-mini">5100</div>
+            <div class="text-mini">4100</div>
             <div  class="default-text mt-5">月季花病害</div>
           </div>
         </div>

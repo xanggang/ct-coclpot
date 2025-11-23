@@ -46,7 +46,7 @@ const listData = ref([
       </div>
     </div>
     <div class="center">
-      <img src="@/assets/floodControl/Frame(2).png" alt="">
+      <img src="@/assets/bus/Frame(5).png" alt="">
     </div>
     <div class="bottom">
       <div class="label-wrap">
@@ -208,7 +208,7 @@ const listData = ref([
         border: 1px solid rgba(255,255,255,0.15);
         margin-right: 20px;
         box-sizing: border-box;
-        background-image: url("@/assets/floodControl/Frame(2).png");
+        background-image: url("@/assets/bus/Frame(4).png");
         background-size: cover;
 
         img {
@@ -220,9 +220,11 @@ const listData = ref([
 
       .button-wrap {
         display: flex;
-        justify-content: center;
+        //justify-content: center;
         align-items: center;
         flex-direction: column;
+        height: 100%;
+        justify-content: space-around;
 
         .button-item {
           width: 140px;
@@ -256,6 +258,7 @@ const listData = ref([
 
       .label-wrap {
         width: 200px;
+        align-self: center;
       }
 
       .table-wrap {
@@ -288,7 +291,7 @@ const listData = ref([
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-right: 8px;
+            //margin-right: 8px;
             flex-shrink: 1;
 
             &:after {

@@ -98,6 +98,10 @@ import LeftTopCardWrap from './comp/LeftTopCardWrap.vue'
       width: 100%;
       height: 100%;
       background-color: rgba(254, 255, 230, 0.09);
+      background-image: url("@/assets/clean/Frame(5).png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
     }
   }
  }

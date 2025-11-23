@@ -30,7 +30,7 @@ const listData = ref([
 
       <div class="item2">
         <div>
-          <span class="value-text mr-5">13540</span>
+          <span class="value-text mr-5">13640</span>
           <span class="default-text">次</span>
         </div>
         <div class="default-text">累计沉淀数据</div>

@@ -66,7 +66,7 @@
 
 .card {
   width: 100%;
-  background-image: url("@/assets/clean/Group 7.png");
+  background-image: url("@/assets/env/Group 12.png");
   background-size: 100% 100%;
   background-repeat: no-repeat;
   padding: 50px 30px 10px;

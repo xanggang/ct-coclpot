@@ -26,7 +26,7 @@ import Progress from './comp/Progress.vue'
         <img src="@/assets/img/gaojing.png" alt="">
 
         <div>
-          <span class="value">7758</span>
+          <span class="value">7128</span>
           <span class="text">次</span>
         </div>
         <div class="text">
@@ -37,7 +37,7 @@ import Progress from './comp/Progress.vue'
         <img src="@/assets/img/gaojing.png" alt="">
 
         <div>
-          <span class="value">30</span>
+          <span class="value">31</span>
           <span class="text">次</span>
         </div>
         <div class="text">
@@ -57,7 +57,7 @@ import Progress from './comp/Progress.vue'
 
       <div class="item item2">
         <div class="flex-center">
-          <span class="label">10</span>
+          <span class="label">11</span>
           <span class="text ml-2">%</span>
           <img src="@/assets/img/arrow-down-1.png" alt="">
         </div>
@@ -66,7 +66,7 @@ import Progress from './comp/Progress.vue'
 
       <div class="item item3">
         <div class="flex-center">
-          <span class="label">119085</span>
+          <span class="label">86</span>
           <span class="text ml-2">次</span>
         </div>
 
