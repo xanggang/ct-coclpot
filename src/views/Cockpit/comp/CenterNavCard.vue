@@ -20,7 +20,7 @@ function handelGo(item) {
 
 <template>
 <div class="center-nav-card">
-  <div class="button active"
+  <div class="button"
        :class="{active: select === item.value}"
        @click="handelGo(item)"
        v-for="(item, index) in config" :key="index">
