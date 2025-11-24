@@ -64,6 +64,16 @@ const router = createRouter({
         hideMenu: false,
       },
     },
+    {
+      path: '/test',
+      component: () => import('@/views/Test/index.vue'),
+      name: 'FloodControl',
+      meta: {
+        title: '清洁',
+        hideBreadcrumb: true,
+        hideMenu: false,
+      },
+    },
   ],
   strict: true,
   scrollBehavior: () => ({left: 0, top: 0}),
