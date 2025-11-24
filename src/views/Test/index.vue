@@ -9,28 +9,40 @@
       <!-- 播放按钮 -->
       <button
         class="control-btn play-btn"
-        :class="{ 'active': currentState === 'playing' }"
-        @click.stop="handlePlayClick"
+        :class="{ 'active': subState === 'playing' }"
+        @click.stop="handleTogglePlaying"
+        v-if="modeState === ModeState.playing"
       >
         <!-- 这里可以用 SVG 图标替换 -->
-        <span v-if="currentState !== 'playing'">▶</span>
+        <span v-if="subState !== PlayingEnums.playing">▶</span>
         <span v-else>⏸</span>
       </button>
 
       <!-- 录音按钮 -->
       <button
         class="control-btn mic-btn"
-        :class="{ 'active': currentState === 'recording' }"
-        @click.stop="handleRecordButtonClick"
+        v-if="modeState === ModeState.recording"
+        :class="{ 'active': subState === Recording.recording }"
+        @click.stop="handleToggleRecording"
       >
         <!-- 这里可以用 SVG 图标替换 -->
         🎤
       </button>
 
+      <!-- 发送状态 -->
+      <button
+        class="control-btn"
+        v-if="modeState === ModeState.recording"
+        :class="{ 'loading': subState === Recording.sending, 'sending-disabled': subState !== Recording.recording }"
+        @click.stop="handleRecordingEnd"
+      >
+        <img src="./submit.png" alt="">
+      </button>
+
       <!-- 波形显示区域 (仅在录音或播放时显示) -->
       <div class="waveform-area">
         <transition name="fade">
-          <div v-if="showWaveform" class="waveform-simulation">
+          <div :class="{ active: showWaveform}" class="waveform-simulation">
             <!-- 模拟波形动画条 -->
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             <span class="bar"></span><span class="bar"></span><span class="bar"></span>
@@ -65,100 +77,163 @@
 
 <script setup>
 import { ref, computed, watch } from 'vue';
-
-// 定义组件的四种可能状态
-// 'collapsed': 收起 (图1)
-// 'idle': 展开但无操作 (图3)
-// 'recording': 录音中 (图2效果)
-// 'playing': 播放中 (图2效果)
-// const WidgetState = 'collapsed' | 'idle' | 'recording' | 'playing';
-
-// 点开之后是idle状态, 展示播放和录音两个状态
-// 点击录音之后, 隐藏播放按钮展示提交按钮
-// 点击提交之后进入等待状态, 发送接口  等待响应
-
-// 由外部调用, 进入播放状态, 展示播放、暂停、停止状态
-
-// 当前状态
-const currentState = ref('idle');
-
-// 计算属性：是否处于展开状态 (idle, recording, 或 playing 都属于展开)
-const isExpanded = computed(() => currentState.value !== 'collapsed');
-
-// 计算属性：是否显示波形 (录音或播放时显示)
-const showWaveform = computed(() => ['recording', 'playing'].includes(currentState.value));
-
-// 切换组件的展开/收起
-const toggleWidgetState = () => {
-  console.log('toggleWidgetState')
-  if (isExpanded.value) {
-    // 如果当前是展开的，就收起
-    currentState.value = 'collapsed';
-    // 这里可以添加逻辑：收起时停止录音或播放
-    console.log('组件收起');
-  } else {
-    // 如果当前是收起的，就展开到待命状态
-    currentState.value = 'idle';
-    console.log('组件展开 (待命状态)');
-  }
-};
-
-// 处理录音按钮点击
-const handleMicClick = () => {
-  if (currentState.value === 'recording') {
-    currentState.value = 'idle'; // 停止录音回到待命
-    console.log('停止录音');
-  } else {
-    currentState.value = 'recording'; // 开始录音
-    console.log('开始录音...');
-  }
-};
-
-// 处理播放按钮点击
-const handlePlayClick = () => {
-  if (currentState.value === 'playing') {
-    currentState.value = 'idle'; // 暂停/停止播放回到待命
-    console.log('停止播放');
-  } else {
-    // 只有在非录音状态下才能播放
-    if (currentState.value !== 'recording') {
-      currentState.value = 'playing'; // 开始播放
-      console.log('开始播放...');
-    }
-  }
-};
-
-
 import { useAudioRecorder } from '@/utils/useAudioRecorder.js';
 
-// 1. 解构出所需的方法和状态
 const {
   isRecording,
   recordedBlob,
   errorMessage,
-  toggleRecording
+  toggleRecording,
+  startRecording,
+  stopRecording
 } = useAudioRecorder();
 
-// 2. 按钮点击处理函数
-const handleRecordButtonClick = async () => {
-  // 调用切换功能：第一次点击开始，第二次点击停止
-  // await toggleRecording();
-  isRecording.value = !isRecording.value
-  currentState.value  = isRecording.value ? 'recording' : 'idle'
+const ModeState = {
+  recording: 'recording',
+  playing: 'playing',
+  idle: 'idle',
+}
+
+const PlayingEnums = {
+  pause: 'pause',
+  stop: 'stop',
+  playing: 'playing',
+}
+
+const Recording = {
+  sending: 'sending',
+  recording: 'recording',
+  idle: 'idle',
+}
+
+// mode recording 录音 playing 播放  collapsed
+
+// playing子状态 pause stop playing
+// recording子状态 Sending 发送中, recording 录音中 结束
+
+// 展开和收起状态
+const isExpanded = ref(false)
+// 播放或者录音状态
+const modeState = ref('')
+// 子状态
+const subState = ref('')
+
+// 计算属性：是否显示波形 (录音或播放时显示)
+const showWaveform = computed(() => [Recording.recording, PlayingEnums.playing].includes(subState.value));
+
+
+// 外部点击 进入播放模式
+function player() {
+  isExpanded.value = true
+  modeState.value = ModeState.playing
+  subState.value = PlayingEnums.playing
+}
+
+// 点击魔方展开, 默认是进入录音的idle状态
+function handleOpenRecording() {
+  isExpanded.value = true
+  modeState.value = ModeState.recording
+  subState.value = Recording.idle
+}
+
+// 点击录音
+function handleRecording() {
+  modeState.value = ModeState.recording
+  subState.value = Recording.recording
+  startRecording()
+}
+
+// 录音完成
+function handleRecordingEnd() {
+  if (subState.value !== Recording.recording) return
+  subState.value = Recording.sending
+
+  const stop = watch(() => recordedBlob.value, (value) => {
+    // 拿到数据了
+    console.log('拿到数据了')
+    console.log(value)
+    value && handleSubmitData(value)
+  }, { immediate: true })
+
+  stopRecording()
+
+
+  setTimeout(() => {
+    subState.value = Recording.idle
+    stop()
+  }, 2000)
+}
+
+function handleToggleRecording() {
+  if (subState.value === Recording.idle) {
+    handleRecording()
+    return
+  }
+
+
+  // if (subState.value === Recording.recording) {
+  //   subState.value = Recording.sending
+  // }
+}
+
+// 暂停
+function handlePause() {
+  modeState.value = ModeState.playing
+  subState.value = PlayingEnums.pause
+}
+
+// 继续播放
+function handleContinuePlay() {
+  modeState.value = ModeState.playing
+  subState.value = PlayingEnums.playing
+}
+
+function handleTogglePlaying() {
+  if (subState.value !== PlayingEnums.playing) {
+    handleContinuePlay()
+  } else {
+    handlePause()
+  }
+}
+
+// 停止播放
+function handleEndPlay() {
+  isExpanded.value = false
+  modeState.value = ModeState.idle
+}
+
+
+// 切换组件的展开/收起
+const toggleWidgetState = () => {
+  if (isExpanded.value) {
+    isExpanded.value = false
+    modeState.value = ''
+    subState.value = ''
+  } else {
+    handleOpenRecording()
+    // player()
+  }
+
+  // player()
+  // console.log('toggleWidgetState')
+  // if (isExpanded.value) {
+  //   // 如果当前是展开的，就收起
+  //   currentState.value = 'collapsed';
+  //   // 这里可以添加逻辑：收起时停止录音或播放
+  //   console.log('组件收起');
+  // } else {
+  //   // 如果当前是收起的，就展开到待命状态
+  //   currentState.value = 'idle';
+  //   console.log('组件展开 (待命状态)');
+  // }
 };
 
-// 3. (可选) 监听 recordedBlob 的变化来执行后续操作
-watch(recordedBlob, (newBlob) => {
-  if (newBlob) {
-    // 这里是需求的核心目标：当录音停止时，newBlob 就是转化好的 Blob 数据
-    console.log('组件内接收到最终的音频 Blob 数据:', newBlob);
-
-    // 示例：创建一个临时的 URL 用于播放测试
-    const audioUrl = URL.createObjectURL(newBlob);
-    const audio = new Audio(audioUrl);
-    audio.play();
-  }
-});
+function handleSubmitData(newBlob) {
+  console.log(newBlob)
+  const audioUrl = URL.createObjectURL(newBlob);
+  const audio = new Audio(audioUrl);
+  audio.play();
+}
 
 </script>
 
@@ -252,6 +327,28 @@ watch(recordedBlob, (newBlob) => {
       color: #7F5EFF;
       box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
+
+    // 只有在录音状态才能点击
+    &.sending-disabled {
+      cursor: not-allowed;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    // 点击之后进入发送状态
+    &.loading {
+      background: white;
+      color: #7F5EFF;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
   }
 }
 
@@ -275,6 +372,13 @@ watch(recordedBlob, (newBlob) => {
   height: 100%;
   padding: 0 5px;
 
+  &.active {
+
+    .bar {
+      animation: sound-wave 1s infinite ease-in-out;
+    }
+  }
+
   .bar {
     display: inline-block;
     width: 4px;
@@ -282,7 +386,8 @@ watch(recordedBlob, (newBlob) => {
     border-radius: 2px;
     background: rgba(255, 255, 255, 0.8);
     // 应用动画
-    animation: sound-wave 1s infinite ease-in-out;
+    //animation: sound-wave 1s infinite ease-in-out;
+
 
     // 为每个条设置不同的延迟，产生波浪感
     &.bar:nth-child(1) {
@@ -321,7 +426,6 @@ watch(recordedBlob, (newBlob) => {
       animation-delay: 0.9s;
       height: 26%;
     }
-
 
   }
 }
