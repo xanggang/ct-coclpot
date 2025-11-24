@@ -30,6 +30,20 @@ defineProps({
 
 .slider-card-wrap {
   width: 100%;
+  box-shadow: 3px 3px 13px #fff;
+  padding: 10px;
+  animation: rotateAroundCenter 6s linear infinite;
+
+  @keyframes rotateAroundCenter {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 1px 1px 5px #fff;
+    }
+    50% {
+      transform: scale(1.01);
+      box-shadow: 1px 1px 5px #000;
+    }
+  }
 
   .card-wrap {
     margin-top: 10px;

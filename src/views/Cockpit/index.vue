@@ -9,7 +9,7 @@ import Left from './Left.vue'
 import Right from './Right.vue'
 import Cube from './comp/Cube.vue'
 
-
+import Test from '../Test/index.vue'
 
 
 </script>

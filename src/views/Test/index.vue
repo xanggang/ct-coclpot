@@ -7,55 +7,65 @@
     <!-- ================== 展开状态下的内容区域 (左侧) ================== -->
     <div class="expanded-controls" v-if="isExpanded">
       <!-- 播放按钮 -->
-      <button
+      <div
         class="control-btn play-btn"
         :class="{ 'active': subState === 'playing' }"
         @click.stop="handleTogglePlaying"
         v-if="modeState === ModeState.playing"
       >
+        <img src="@/assets/player/play.png" v-if="subState !== PlayingEnums.playing">
+        <img src="@/assets/player/pause.png" v-if="subState === PlayingEnums.playing" alt="">
+<!--        <img src="@/assets/player/stop.png" v-if="subState === PlayingEnums.playing" alt="">-->
         <!-- 这里可以用 SVG 图标替换 -->
-        <span v-if="subState !== PlayingEnums.playing">▶</span>
-        <span v-else>⏸</span>
-      </button>
+<!--        <span v-if="subState !== PlayingEnums.playing">▶</span>-->
+<!--        <span v-else>⏸</span>-->
+      </div>
 
       <!-- 录音按钮 -->
-      <button
+      <div
         class="control-btn mic-btn"
         v-if="modeState === ModeState.recording"
         :class="{ 'active': subState === Recording.recording }"
         @click.stop="handleToggleRecording"
       >
         <!-- 这里可以用 SVG 图标替换 -->
-        🎤
-      </button>
-
-      <!-- 发送状态 -->
-      <button
-        class="control-btn"
-        v-if="modeState === ModeState.recording"
-        :class="{ 'loading': subState === Recording.sending, 'sending-disabled': subState !== Recording.recording }"
-        @click.stop="handleRecordingEnd"
-      >
-        <img src="./submit.png" alt="">
-      </button>
+        <img src="@/assets/player/recording.png" alt="">
+      </div>
 
       <!-- 波形显示区域 (仅在录音或播放时显示) -->
-      <div class="waveform-area">
+      <div class="waveform-area" v-if="subState !== Recording.sending">
         <transition name="fade">
           <div :class="{ active: showWaveform}" class="waveform-simulation">
             <!-- 模拟波形动画条 -->
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
-            <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
           </div>
         </transition>
+      </div>
+
+      <div class="waveform-area" style="text-align: left" v-else>
+        等待响应·····
       </div>
     </div>
 
     <!-- ================== 收起状态下的文字区域 (中间) ================== -->
-    <div class="collapsed-text" @click.stop="handlePlayClick">
-      AI助手
-    </div>
+
 
     <!-- ================== 常驻的 AI Cube 图标 (最右侧触发器) ================== -->
     <!-- 点击切换展开/收起状态 -->
@@ -72,6 +82,9 @@
 <!--       <div class="cube-placeholder">AI<br>Cube</div>-->
     </div>
 
+    <div class="collapsed-text" v-if="!isExpanded">
+      AI助手
+    </div>
   </div>
 </template>
 
@@ -116,7 +129,7 @@ const isExpanded = ref(false)
 // 播放或者录音状态
 const modeState = ref('')
 // 子状态
-const subState = ref('')
+const subState = ref('sending')
 
 // 计算属性：是否显示波形 (录音或播放时显示)
 const showWaveform = computed(() => [Recording.recording, PlayingEnums.playing].includes(subState.value));
@@ -140,28 +153,29 @@ function handleOpenRecording() {
 function handleRecording() {
   modeState.value = ModeState.recording
   subState.value = Recording.recording
-  startRecording()
+  // startRecording()
 }
 
 // 录音完成
 function handleRecordingEnd() {
   if (subState.value !== Recording.recording) return
   subState.value = Recording.sending
+  console.log('handleRecordingEnd')
 
-  const stop = watch(() => recordedBlob.value, (value) => {
-    // 拿到数据了
-    console.log('拿到数据了')
-    console.log(value)
-    value && handleSubmitData(value)
-  }, { immediate: true })
+  // const stop = watch(() => recordedBlob.value, (value) => {
+  //   // 拿到数据了
+  //   console.log('拿到数据了')
+  //   console.log(value)
+  //   value && handleSubmitData(value)
+  // }, { immediate: true })
+  //
+  // stopRecording()
 
-  stopRecording()
 
-
-  setTimeout(() => {
-    subState.value = Recording.idle
-    stop()
-  }, 2000)
+  // setTimeout(() => {
+  //   subState.value = Recording.idle
+  //   stop()
+  // }, 2000)
 }
 
 function handleToggleRecording() {
@@ -170,10 +184,9 @@ function handleToggleRecording() {
     return
   }
 
-
-  // if (subState.value === Recording.recording) {
-  //   subState.value = Recording.sending
-  // }
+  if (subState.value === Recording.recording) {
+    handleRecordingEnd()
+  }
 }
 
 // 暂停
@@ -229,7 +242,6 @@ const toggleWidgetState = () => {
 };
 
 function handleSubmitData(newBlob) {
-  console.log(newBlob)
   const audioUrl = URL.createObjectURL(newBlob);
   const audio = new Audio(audioUrl);
   audio.play();
@@ -239,39 +251,52 @@ function handleSubmitData(newBlob) {
 
 <style lang="less" scoped>
 // 变量定义，方便调整颜色和尺寸
-@bg-gradient: linear-gradient(135deg, #7F5EFF, #5B86FE);
-@height: 64px;
-@collapsed-width: 160px; // 收起时的宽度，根据图片预估
-@expanded-width: 380px;  // 展开时的宽度，根据图片预估
-@border-radius: 32px;
+@bg-gradient: linear-gradient(90deg, rgba(103, 76, 177, 0.79), rgba(125, 159, 251, 0.68));
+@height: 48px;
+@collapsed-width: 150px; // 收起时的宽度，根据图片预估
+@expanded-width: 280px;  // 展开时的宽度，根据图片预估
+@border-radius: 24px;
 @transition-curve: cubic-bezier(0.34, 1.56, 0.64, 1); // 带有轻微回弹的动画曲线
+
+
+
 
 .ai-widget-container {
   position: fixed;
-  right: 200px;
-  bottom: 100px; // 根据需要调整页面位置
-  height: @height;
+  top: 100px; // 根据需要调整页面位置
+  height: 70px;
   // 核心动画属性：宽度过渡
-  width: @collapsed-width;
-  background: @bg-gradient;
-  border-radius: @border-radius;
+  width: 120px;
+  background: #200749;
+  border-radius:  calc(@border-radius * 2) ;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
+  flex-direction: column;
   padding-left: 20px;
-  padding-right: 20px;
   box-sizing: border-box;
-  box-shadow: 0 8px 20px rgba(91, 134, 254, 0.3);
+  //box-shadow: 0 8px 20px rgba(33, 4, 102, 0.55);
   //overflow: hidden; // 关键：隐藏超出宽度的内容
   transition: width 0.5s @transition-curve;
   z-index: 100;
   font-size: 14px;
+  border: 2px solid  rgba(97, 58, 235, 1);
+  right: -30px;
+  padding-right: 40px;
+  box-shadow: -1px -1px 0 #fff;
+
+
 
   // 展开状态的样式覆写
   &.is-expanded {
     width: @expanded-width;
     // 展开时，左侧内边距增大一点，让按钮不靠边
     padding-left: 12px;
+    flex-direction: row;
+    height:@height;
+    right:30px;
+    padding-right: 20px;
+    //width: @collapsed-width;
   }
 }
 
@@ -298,34 +323,34 @@ function handleSubmitData(newBlob) {
 
   // 圆形按钮通用样式
   .control-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    //border-radius: 50%;
     border: none;
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-    font-size: 18px;
+    //background: rgba(255, 255, 255, 0.2);
+    //color: white;
+    //font-size: 18px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    margin-right: 12px;
     transition: all 0.2s;
     flex-shrink: 0;
+    background: transparent;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.3);
+      //background: rgba(255, 255, 255, 0.3);
     }
 
     &:active {
-      transform: scale(0.95);
+      //transform: scale(0.95);
     }
 
     // 激活状态 (录音或播放中)
     &.active {
-      background: white;
+      //background: white;
       color: #7F5EFF;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      //box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
 
     // 只有在录音状态才能点击
@@ -333,15 +358,15 @@ function handleSubmitData(newBlob) {
       cursor: not-allowed;
 
       &:hover {
-        background: rgba(255, 255, 255, 0.2);
+        //background: rgba(255, 255, 255, 0.2);
       }
     }
 
     // 点击之后进入发送状态
     &.loading {
-      background: white;
+      //background: white;
       color: #7F5EFF;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+      //box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     }
 
     img {
@@ -358,9 +383,12 @@ function handleSubmitData(newBlob) {
   height: 30px;
   display: flex;
   align-items: center;
-  margin-right: 10px;
   overflow: hidden;
   position: relative;
+  font-size: 16px;
+  color: #8bb5ee;
+  justify-content: center;
+  //margin-left: 10px;
 }
 
 // CSS 模拟波形动画
@@ -368,8 +396,8 @@ function handleSubmitData(newBlob) {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   padding: 0 5px;
 
   &.active {
@@ -381,9 +409,9 @@ function handleSubmitData(newBlob) {
 
   .bar {
     display: inline-block;
-    width: 4px;
+    width: 2px;
     height: 100%;
-    border-radius: 2px;
+    border-radius: 1px;
     background: rgba(255, 255, 255, 0.8);
     // 应用动画
     //animation: sound-wave 1s infinite ease-in-out;
@@ -426,7 +454,42 @@ function handleSubmitData(newBlob) {
       animation-delay: 0.9s;
       height: 26%;
     }
-
+    &.bar:nth-child(10) {
+      animation-delay: 0.1s;
+      height: 60%;
+    }
+    &.bar:nth-child(11) {
+      animation-delay: 0.2s;
+      height: 55%;
+    }
+    &.bar:nth-child(12) {
+      animation-delay: 0.3s;
+      height: 70%;
+    }
+    &.bar:nth-child(13) {
+      animation-delay: 0.4s;
+      height: 12%;
+    }
+    &.bar:nth-child(14) {
+      animation-delay: 0.5s;
+      height: 85%;
+    }
+    &.bar:nth-child(15) {
+      animation-delay: 0.6s;
+      height: 23%;
+    }
+    &.bar:nth-child(16) {
+      animation-delay: 0.7s;
+      height: 67%;
+    }
+    &.bar:nth-child(17) {
+      animation-delay: 0.8s;
+      height: 95%;
+    }
+    &.bar:nth-child(18) {
+      animation-delay: 0.9s;
+      height: 26%;
+    }
   }
 }
 
@@ -439,12 +502,14 @@ function handleSubmitData(newBlob) {
 
 /* ============ 区域：收起时的文字 (中间) ============ */
 .collapsed-text {
-  color: #fff;
+  color: #8BB5EE;
   font-size: 16px;
   font-weight: 600;
   white-space: nowrap;
   opacity: 1;
   transition: opacity 0.2s ease-out 0.2s; // 收起时延迟显示
+  line-height: 1;
+  font-family: SourceHanSansSC;
 
   // 展开时隐藏
   .is-expanded & {
@@ -456,8 +521,8 @@ function handleSubmitData(newBlob) {
 
 /* ============ 区域：AI Cube 触发器 (右侧常驻) ============ */
 .ai-cube-trigger {
-  width: 56px;
-  height: 56px;
+  width: 46px;
+  height: 46px;
   // 稍微向右突出一点，制造立体感
   margin-right: -8px;
   //position: relative;

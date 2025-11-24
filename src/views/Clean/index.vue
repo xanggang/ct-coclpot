@@ -66,7 +66,7 @@ import Right from './Right.vue'
     background-image: url("@/assets/clean/Group 5.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    padding: 30px 30px 10px;
+    padding: 50px 30px 10px;
     box-sizing: border-box;
     position: relative;
 

@@ -101,6 +101,11 @@
     flex-direction: column;
     font-size: 14px;
 
+    /* 动画定义 */
+    animation: wobble 10s ease-in-out infinite alternate;
+
+    //
+
     .label-container {
       margin-bottom: 5px;
       margin-top: -30px;
@@ -168,6 +173,26 @@
     animation-delay: -6.4s;
     top: 50%;
     left: 10%;
+  }
+}
+
+/* 晃动动画 */
+@keyframes wobble {
+  0%, 100% {
+    transform: translateX(-5px) translateY(6px) scale(0.95);
+  }
+  50% {
+    transform: translateX(9px) translateY(-4px) scale(1.05);
+  }
+}
+
+/* 缩放动画 */
+@keyframes scale {
+  0%, 100% {
+    transform: scale(0.95);
+  }
+  50% {
+    transform: scale(1.05);
   }
 }
 

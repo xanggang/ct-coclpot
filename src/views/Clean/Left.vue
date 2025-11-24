@@ -1,5 +1,14 @@
 <script setup>
 import ProgressBar from './ProgressBar.vue'
+
+import Frame3 from '@/assets/clean/Frame(3).png'
+import Frame8 from '@/assets/clean/image8(1).png'
+
+import image7 from '@/assets/clean/image7.png'
+import image8 from '@/assets/clean/image8.png'
+import image9 from '@/assets/clean/image9.png'
+import image10 from '@/assets/clean/image8(1).png'
+import image11 from '@/assets/clean/image7(1).png'
 </script>
 
 <template>
@@ -10,11 +19,16 @@ import ProgressBar from './ProgressBar.vue'
           物联感知层
         </div>
 
-        <div class="img-card">
-          <div class="img1"></div>
-          <div class="img2"></div>
-          <div class="img3"></div>
-        </div>
+        <a-carousel class="img-card">
+          <a-image :src="image7" class="ant-image-img-self" :style="{ objectFit: 'contain' }"></a-image>
+          <a-image :src="image8" class="ant-image-img-self" :style="{ objectFit: 'cover' }"></a-image>
+          <a-image :src="image9" class="ant-image-img-self" :style="{ objectFit: 'cover' }"></a-image>
+        </a-carousel>
+<!--        <div class="img-card">-->
+<!--          <div class="img1"></div>-->
+<!--          <div class="img2"></div>-->
+<!--          <div class="img3"></div>-->
+<!--        </div>-->
 
         <div class="title-1">
           高精度定位
@@ -22,12 +36,12 @@ import ProgressBar from './ProgressBar.vue'
       </div>
       <div class="top-right">
         <div class="title">
-          物联感知层
+          数据层
         </div>
-        <div class="img-card">
-          <div class="img1"></div>
-          <div class="img2"></div>
-        </div>
+        <a-carousel class="img-card" autoplay>
+          <a-image :src="image10" class="ant-image-img-self" :style="{ objectFit: 'contain' }"></a-image>
+          <a-image :src="image11" class="ant-image-img-self" :style="{ objectFit: 'contain' }"></a-image>
+        </a-carousel>
         <div class="title-1">
           清运计划
         </div>
@@ -43,7 +57,8 @@ import ProgressBar from './ProgressBar.vue'
           </div>
           <div class="button">3天调度排班</div>
           <div class="button">7天预测计划</div>
-          <div class="img"></div>
+<!--          <div class="img"></div>-->
+          <a-image :src="Frame3" class="ant-image-img-self-b" width="257" height="129"></a-image>
           <div class="text-blue">智能调度线路</div>
         </div>
         <div class="item item-dubbo">
@@ -68,7 +83,7 @@ import ProgressBar from './ProgressBar.vue'
           </div>
           <div class="button">混装混运识别</div>
           <div class="button">7天预测计划</div>
-          <div class="img1"></div>
+          <a-image :src="Frame8" class="ant-image-img-self-b" width="257" height="129"></a-image>
           <div class="text-blue">系统告警</div>
         </div>
         <div class="item">
@@ -117,65 +132,27 @@ import ProgressBar from './ProgressBar.vue'
 
     > div {
       width: 48%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
     }
 
     .img-card {
       width: 100%;
-      height: 248px;
-      position: relative;
-      //display: flex;
-      //justify-content: center;
-      //align-items: center;
+      height: 100%;
+      //position: relative;
 
-      .img1 {
-        position: absolute;
-        z-index: 9;
-        width: 100%;
+      div {
         height: 100%;
-        background-image: url("@/assets/clean/image8.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: center;
       }
 
-      .img2 {
-        position: absolute;
-        z-index: 8;
-        width: 100%;
-        height: 80%;
-        margin-top: 3%;
-        background-image: url("@/assets/clean/image7.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: left center;
-      }
-
-      .img3 {
-        position: absolute;
-        z-index: 8;
-        width: 100%;
-        height: 80%;
-        margin-top: 3%;
-        background-image: url("@/assets/clean/image9.png");
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-position: right center;
+      img {
+        height: 248px;
       }
     }
 
-    .top-right {
-      .img1 {
-        background-image: url("@/assets/clean/image8(1).png");
-      }
-
-      .img2 {
-        background-image: url("@/assets/clean/image7(1).png");
-      }
-
-      .img3 {
-        background-image: url("@/assets/clean/image9.png");
-      }
-    }
   }
 
   .bottom {
@@ -256,14 +233,20 @@ import ProgressBar from './ProgressBar.vue'
         .img {
           width: 257px;
           height: 129px;
-          background-size: cover;
-          background-image: url("@/assets/clean/Frame(3).png");
+          //background-size: cover;
+          //background-image: url("@/assets/clean/Frame(3).png");
         }
+
+        .ssss8888 {
+          width: 257px!important;
+          height: 129px!important;
+        }
+
         .img1 {
           width: 257px;
           height: 129px;
-          background-size: cover;
-          background-image: url("@/assets/clean/image8(1).png");
+          //background-size: cover;
+          //background-image: url("@/assets/clean/image8(1).png");
         }
 
         .text-blue {
@@ -278,5 +261,20 @@ import ProgressBar from './ProgressBar.vue'
       }
     }
   }
+}
+
+
+</style>
+
+
+<style>
+.ant-image-img-self {
+  width: 100%;
+  height: 300px!important;
+}
+
+.ant-image-img-self-b {
+  width: 100%;
+  height: 129px!important;
 }
 </style>

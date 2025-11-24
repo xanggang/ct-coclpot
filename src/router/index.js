@@ -67,7 +67,7 @@ const router = createRouter({
     {
       path: '/test',
       component: () => import('@/views/Test/index.vue'),
-      name: 'FloodControl',
+      name: 'test',
       meta: {
         title: '清洁',
         hideBreadcrumb: true,

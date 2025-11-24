@@ -2,7 +2,11 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const { push } = useRouter()
+console.log(1)
+const router = useRouter()
+console.log(2)
+
+console.log(router)
 
 const select = ref('1')
 const config = [
@@ -13,7 +17,7 @@ const config = [
 ]
 
 function handelGo(item) {
-  push(item.path)
+  router.push(item.path)
 }
 
 </script>

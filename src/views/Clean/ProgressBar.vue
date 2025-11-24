@@ -16,7 +16,9 @@ function run() {
 
 onMounted(run)
 
-onUnmounted(clearInterval(timer))
+onUnmounted(() => {
+  clearInterval(timer)
+})
 </script>
 
 <template>

@@ -16,6 +16,7 @@
   "dependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",
     "@vueuse/core": "^14.0.0",
+    "ant-design-vue": "^4.2.6",
     "autoprefixer": "^10.4.22",
     "axios": "^1.13.2",
     "dayjs": "^1.11.19",
