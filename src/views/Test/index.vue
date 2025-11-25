@@ -258,9 +258,6 @@ function handleSubmitData(newBlob) {
 @border-radius: 24px;
 @transition-curve: cubic-bezier(0.34, 1.56, 0.64, 1); // 带有轻微回弹的动画曲线
 
-
-
-
 .ai-widget-container {
   position: fixed;
   top: 100px; // 根据需要调整页面位置
